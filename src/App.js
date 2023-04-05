@@ -12,8 +12,8 @@ class DatePicker extends React.Component {
     $(this.inputRef).datepicker('setDate', this.props.value || '');
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.value !== prevProps.value) {
+  componentDidChange(oldProps) {
+    if (this.props.value !== oldProps.value) {
       $(this.inputRef).datepicker('setDate', this.props.value || '');
     }
   }
@@ -24,8 +24,8 @@ class DatePicker extends React.Component {
         ref={(domElement) => {
           this.inputRef = domElement;
         }}
-        value={this.props.value || ''}
         onChange={(e) => this.props.onChange(e.target.value)}
+        value={this.props.value || ''}
       />
     );
   }
@@ -36,23 +36,25 @@ export default class App extends React.Component {
     date: '1/4/2023',
   };
 
-  ChangeDate = (date) => {
-    this.setState({ date });
-  };
-
   ResetDate = () => {
     this.setState({ date: null });
+  };
+
+  ChangeDate = (date) => {
+    this.setState({ date });
   };
 
   render() {
     return (
       <React.Fragment>
-        <div>{this.state.date ? `Date: ${this.state.date}` : 'Select date'}</div>
+        <div>
+          {this.state.date ? `Date: ${this.state.date}` : 'Select date'}
+        </div>
         <div>
           <DatePicker
-            value={this.state.date}
             onChange={this.ChangeDate}
             onSelect={this.ChangeDate}
+            value={this.state.date}
           />
         </div>
         <div>
