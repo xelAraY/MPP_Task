@@ -37,7 +37,7 @@ export default class App extends React.Component {
   };
 
   ResetDate = () => {
-    this.setState({ date: null });
+    this.setState({ date: '' });
   };
 
   ChangeDate = (date) => {
